@@ -2,13 +2,16 @@ package models;
 
 import enums.Genre;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Book {
     private Author author;
     private String title;
     private Genre genre;
     private String description;
     private int year;
-    private String keywords;
+    private List<String> keywords;
     private double rating;
     private int isbn;
 
@@ -18,7 +21,7 @@ public class Book {
         this.genre = genre;
         this.description = description;
         this.year = year;
-        this.keywords = keywords;
+        this.keywords = Arrays.asList(keywords.split(", "));
         this.rating = rating;
         this.isbn = isbn;
     }
