@@ -24,5 +24,45 @@ public class Book {
         this.keywords = Arrays.asList(keywords.split(", "));
         this.rating = rating;
         this.isbn = isbn;
+        this.author.getBooks().add(this);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    @Override
+    public String toString() {
+        return this.title + " by " + this.author.getFirstName() + " " + this.author.getLastName() +
+                "\nGenre: " + this.genre +
+                "\nISBN: " + this.isbn;
     }
 }

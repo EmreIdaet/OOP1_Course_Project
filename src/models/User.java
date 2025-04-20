@@ -10,4 +10,19 @@ public class User {
         this.password = password;
         this.isAdmin = isAdmin;
     }
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
 }

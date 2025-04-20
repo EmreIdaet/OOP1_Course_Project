@@ -16,6 +16,28 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author: " + firstName + " " + lastName + "\nBooks: " + books;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Author: ");
+        sb.append(firstName).append(" ").append(lastName).append("\nBooks: ");
+        for (Book book : books) {
+            if(book.equals(books.getLast())) {
+                sb.append(book.getTitle());
+            } else {
+                sb.append(book.getTitle()).append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }
