@@ -38,14 +38,11 @@ public class UserLogin implements Command {
     }
 
     private String readPassword(String prompt) throws IOException {
-        /*Console console = System.console();
+        Console console = System.console();
         if (console != null){
             char[] passwordArray = console.readPassword(prompt);
             return new String(passwordArray);
-        } else {
-            System.out.print(prompt);
-            return scanner.nextLine();
-        }*/
+        }
         System.out.print(prompt);
         StringBuilder password = new StringBuilder();
         while (true) {
