@@ -25,9 +25,7 @@ public class UserLogin implements Command {
         if(userManager.isLoggedIn()){
             throw new CommandException("You are already logged in.");
         }
-        if (args.length < 2) {
-            throw new CommandException("Usage: userslogin <username> <password>");
-        }
+
         try {
         System.out.print("Username: ");
         String username = reader.readLine();
