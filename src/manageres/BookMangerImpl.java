@@ -17,6 +17,9 @@ public class BookMangerImpl implements BookManager {
 
     @Override
     public void addBook(Book book) {
+        if(getBook(book.getIsbn()) != null) {
+            throw new IllegalArgumentException("Book with ISBN " + book.getIsbn() + " already exists.");
+        }
         books.add(book);
     }
 

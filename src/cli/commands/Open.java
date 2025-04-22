@@ -41,7 +41,9 @@ public class Open implements Command {
         }
         try {
             List<Book> books = FileManager.loadFromFile(filename);
-            ((BookMangerImpl) bookManager).setBooks(books); // cast to BookMangerImpl
+            for (Book book : books) {
+                bookManager.addBook(book);
+            }
             fileStatus.setCurrentFile(filename);
             System.out.println("Successfully opened " + filename);
         } catch (Exception e) {

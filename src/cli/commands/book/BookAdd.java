@@ -52,6 +52,8 @@ public class BookAdd implements Command {
             Book book = new Book(new Author(first, last), title, genre, description, year, keywordsInput, rating, isbn);
             bookManager.addBook(book);
             System.out.println("Book added successfully.");
+        } catch (IllegalArgumentException e) {
+            throw new CommandException("Book not added: " + e.getMessage());
         } catch (Exception e) {
             throw new CommandException("Invalid input: " + e.getMessage());
         }

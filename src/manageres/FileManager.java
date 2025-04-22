@@ -55,7 +55,7 @@ public class FileManager {
                         book.getGenre() + "|" +
                         book.getDescription() + "|" +
                         book.getYear() + "|" +
-                        String.join(",", book.getKeywords()) + "|" +
+                        String.join(", ", book.getKeywords()) + "|" +
                         book.getRating() + "|" +
                         book.getIsbn();
                 writer.write(line);
