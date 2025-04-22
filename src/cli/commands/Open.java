@@ -33,18 +33,18 @@ public class Open implements Command {
         if (!filePath.endsWith(".txt")) {
             throw new CommandException("Invalid file format. Please use a .txt file.");
         }
-        FileManager fileManager = new FileManager();
+
         String filename = args[1].split("/")[args[1].split("/").length - 1];
         File file = new File(filePath);
         if (!file.exists()) {
             file.createNewFile();
         }
         try {
-            List<Book> books = FileManager.loadFromFile(filename);
+            List<Book> books = FileManager.loadFromFile(filePath);
             for (Book book : books) {
                 bookManager.addBook(book);
             }
-            fileStatus.setCurrentFile(filename);
+            fileStatus.setCurrentFile(filePath);
             System.out.println("Successfully opened " + filename);
         } catch (Exception e) {
             throw new CommandException("Failed to open file: " + e.getMessage());

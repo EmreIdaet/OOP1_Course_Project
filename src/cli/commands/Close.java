@@ -25,9 +25,10 @@ public class Close implements Command {
         if (args.length < 1) {
             throw new CommandException("Usage: close");
         }
-        ((BookMangerImpl) bookManager).setBooks(new ArrayList<>());
+        BookMangerImpl.setBooks(new ArrayList<>());
         String currentFile = fileSupplier.get();
+        String filename = currentFile.split("/")[currentFile.split("/").length - 1];
         fileStatus.setCurrentFile(null);
-        System.out.println("Successfully closed " + currentFile);
+        System.out.println("Successfully closed " + filename);
     }
 }

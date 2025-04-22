@@ -20,13 +20,14 @@ public class Save implements Command {
 
     @Override
     public void execute(String[] args) throws CommandException {
-        String filename = fileSupplier.get();
+        String currentFile = fileSupplier.get();
+        String filename = currentFile.split("/")[currentFile.split("/").length - 1];
         if (filename == null || filename.isBlank()) {
             throw new CommandException("No file is currently opened.");
         }
         try {
             List<Book> books = bookManager.getAllBooks();
-            FileManager.saveToFile(filename, books);
+            FileManager.saveToFile(currentFile, books);
             System.out.println("Successfully saved " + filename);
         } catch (Exception e) {
             throw new CommandException("Failed to save: " + e.getMessage());

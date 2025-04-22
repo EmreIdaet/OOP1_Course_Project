@@ -34,7 +34,8 @@ public class SaveAs implements Command {
             }
             FileManager.saveToFile(filePath, books);
             fileStatus.setCurrentFile(filePath);
-            System.out.println("Successfully saved " + filePath);
+            String filename = args[1].split("/")[args[1].split("/").length - 1];
+            System.out.println("Successfully saved " + filename);
         } catch (Exception e) {
             throw new CommandException("Failed to save as: " + e.getMessage());
         }
