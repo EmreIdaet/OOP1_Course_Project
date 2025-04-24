@@ -24,9 +24,9 @@ public class CLI {
     private String openedFile = null;
     private final Map<String, Command> commandMap = new HashMap<>();
 
-    public CLI() {
         FileStatus fileStatus = this::setCurrentFile;
         FileSupplier fileSupplier = this::getCurrentFile;
+    public CLI() {
 
         commandMap.put("open", new Open(bookManager, fileStatus));
         commandMap.put("close", new Close(bookManager, fileStatus, fileSupplier));
@@ -57,6 +57,11 @@ public class CLI {
             }
             String commandName = args[0].toLowerCase();
             Command command = commandMap.get(commandName);
+
+            if(fileSupplier.get() == null && !commandName.equals("open") && !commandName.equals("help") && !commandName.equals("exit")) {
+                System.out.println("No file is currently opened. Please open a file first.");
+                continue;
+            }
             if (command != null) {
                 try {
                     command.execute(args);
