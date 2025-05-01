@@ -10,14 +10,31 @@ import models.Book;
 import java.util.List;
 
 public class SaveAs implements Command {
+    /**
+     * This class is responsible for saving the current state of the book manager to a new file.
+     * It retrieves the current file path from the file status and saves the books to that file.
+     */
     private final BookManager bookManager;
     private final FileStatus fileStatus;
 
+    /**
+     * Constructor for SaveAs command.
+     *
+     * @param bookManager The book manager to handle book operations.
+     * @param fileStatus  The file status to manage the current file.
+     */
     public SaveAs(BookManager bookManager, FileStatus fileStatus) {
         this.bookManager = bookManager;
         this.fileStatus = fileStatus;
     }
 
+    /**
+     * Executes the command to save the current state of the book manager to a new file.
+     * Retrieves the current file path from the file status and saves the books to that file.
+     *
+     * @param args Command line arguments (file path).
+     * @throws CommandException If there are any issues while saving the books.
+     */
     @Override
     public void execute(String[] args) throws CommandException {
         if(args.length != 2) {

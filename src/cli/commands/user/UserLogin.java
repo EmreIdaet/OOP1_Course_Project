@@ -11,15 +11,34 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class UserLogin implements Command {
+    /**
+     * This class is responsible for handling user login functionality.
+     * It checks if the user is already logged in and prompts for username and password.
+     * If the login is successful, it welcomes the user.
+     */
     private final UserManager userManager;
     //private final Scanner scanner;
     private final BufferedReader reader;
 
+    /**
+     * Constructor for UserLogin command.
+     *
+     * @param userManager The user manager to handle user operations.
+     * @param scanner     The scanner to read user input.
+     */
     public UserLogin(UserManager userManager, Scanner scanner) {
         this.userManager = userManager;
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    /**
+     * Executes the command to log in a user.
+     * Checks if the user is already logged in and prompts for username and password.
+     * If the login is successful, it welcomes the user.
+     *
+     * @param args Command line arguments (username and password).
+     * @throws CommandException If the user is already logged in or if there are any issues while logging in.
+     */
     @Override
     public void execute(String[] args) throws CommandException {
         if(userManager.isLoggedIn()){
@@ -37,6 +56,13 @@ public class UserLogin implements Command {
         }
     }
 
+    /**
+     * Reads a password from the console without echoing it.
+     *
+     * @param prompt The prompt to display to the user.
+     * @return The entered password.
+     * @throws IOException If there is an error reading the password.
+     */
     private String readPassword(String prompt) throws IOException {
         Console console = System.console();
         if (console != null){

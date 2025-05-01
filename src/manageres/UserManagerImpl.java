@@ -9,15 +9,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserManagerImpl implements UserManager {
+    /**
+     * This class manages user accounts in the library system.
+     * It provides methods for user login, logout, and account management.
+     */
     private final Map<String, User> users = new HashMap<>();
     private User currentUser = null;
     private final UserFileManager userFileManager;
 
+    /**
+     * Constructor to initialize the UserManagerImpl with a specific filename.
+     * It loads users from the file and initializes the user map.
+     */
     public UserManagerImpl() {
         this.userFileManager = new UserFileManager("users.txt");
         this.users.putAll(loadUsers());
     }
 
+    /**
+     * Loads users from the specified file.
+     * If the file is empty, it creates a default admin user.
+     *
+     * @return A map of usernames to User objects.
+     */
     private Map<String, User> loadUsers() {
         try {
             Map<String, User> loaded = userFileManager.loadUsers();
@@ -34,6 +48,13 @@ public class UserManagerImpl implements UserManager {
         }
     }
 
+    /**
+     * Logs in a user with the given username and password.
+     *
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @throws CommandException If there is an error during command execution.
+     */
     @Override
     public void login(String username, String password) throws CommandException {
         if (currentUser != null) {
@@ -47,6 +68,11 @@ public class UserManagerImpl implements UserManager {
 
     }
 
+    /**
+     * Logout the current user.
+     *
+     * @throws CommandException If there is an error during command execution.
+     */
     @Override
     public void logout() throws CommandException {
         if (currentUser == null) {
@@ -55,21 +81,43 @@ public class UserManagerImpl implements UserManager {
         currentUser = null;
     }
 
+    /**
+     * Checks if the user is logged in.
+     *
+     * @return true if the user is logged in, false otherwise.
+     */
     @Override
     public boolean isLoggedIn() {
         return currentUser != null;
     }
 
+    /**
+     * Checks if the current user is an admin.
+     *
+     * @return true if the user is an admin, false otherwise.
+     */
     @Override
     public boolean isAdmin() {
         return currentUser != null && currentUser.isAdmin();
     }
 
+    /**
+     * Gets the current user.
+     *
+     * @return The current user.
+     */
     @Override
     public User getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * Adds a new user to the library system.
+     *
+     * @param username The username of the new user.
+     * @param password The password of the new user.
+     * @throws CommandException If there is an error during command execution.
+     */
     @Override
     public boolean addUser(String username, String password) throws CommandException {
         String key = username.toLowerCase();
@@ -90,6 +138,12 @@ public class UserManagerImpl implements UserManager {
         return true;
     }
 
+    /**
+     * Removes a user from the library system.
+     *
+     * @param username The username of the user to be removed.
+     * @throws CommandException If there is an error during command execution.
+     */
     @Override
     public boolean removeUser(String username) throws CommandException {
         String key = username.toLowerCase();

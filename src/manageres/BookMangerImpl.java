@@ -1,5 +1,6 @@
 package manageres;
 
+import exceptions.CommandException;
 import interfaces.BookManager;
 import interfaces.FileSupplier;
 import models.Book;
@@ -9,12 +10,26 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BookMangerImpl implements BookManager {
+    /**
+     * This class implements the BookManager interface and provides methods to manage a collection of books.
+     * It allows adding, removing, retrieving, and sorting books based on various criteria.
+     */
     private static List<Book> books = new ArrayList<>();
 
+    /**
+     * This method sets the list of books.
+     *
+     * @param books The list of books to be set.
+     */
     public static void setBooks(List<Book> books) {
         BookMangerImpl.books = books;
     }
 
+    /**
+     * This method retrieves the list of books.
+     *
+     * @return The list of books.
+     */
     @Override
     public void addBook(Book book) {
         if(getBook(book.getIsbn()) != null) {
@@ -23,11 +38,22 @@ public class BookMangerImpl implements BookManager {
         books.add(book);
     }
 
+    /**
+     * This method removes a book from the list based on its ISBN.
+     *
+     * @param isbn The ISBN of the book to be removed.
+     */
     @Override
     public void removeBook(int isbn) {
         books.removeIf(book -> book.getIsbn() == isbn);
     }
 
+    /**
+     * This method retrieves a book from the list based on its ISBN.
+     *
+     * @param isbn The ISBN of the book to be retrieved.
+     * @return The book with the specified ISBN.
+     */
     @Override
     public Book getBook(int isbn) {
         for (Book book : books) {
@@ -38,6 +64,11 @@ public class BookMangerImpl implements BookManager {
         return null;
     }
 
+    /**
+     * This method retrieves all books from the list.
+     *
+     * @return A list of all books.
+     */
     @Override
     public List<Book> getAllBooks() {
 //        if (books.isEmpty()) {
@@ -46,6 +77,13 @@ public class BookMangerImpl implements BookManager {
         return new ArrayList<>(books);
     }
 
+    /**
+     * This method finds books based on a specific option and value.
+     *
+     * @param option The option to search by (title, author, tag).
+     * @param value  The value to search for.
+     * @return A list of books that match the search criteria.
+     */
     @Override
     public List<Book> findBooks(String option, String value) {
         List<Book> foundBooks = new ArrayList<>();
@@ -65,8 +103,15 @@ public class BookMangerImpl implements BookManager {
         return new ArrayList<>(foundBooks);
     }
 
+    /**
+     * This method sorts the books based on a specified option and order.
+     *
+     * @param option The option to sort by (title, author, tag).
+     * @param order  The order to sort in (asc or desc).
+     * @throws CommandException If the sorting fails.
+     */
     @Override
-    public void sortBooks(String option, String order) {
+    public void sortBooks(String option, String order) throws CommandException {
         Comparator<Book> comparator = null;
         switch (option) {
             case "title":
@@ -82,8 +127,7 @@ public class BookMangerImpl implements BookManager {
                 comparator = Comparator.comparingDouble(Book::getRating);
                 break;
             default:
-                System.out.println("Invalid sort option.");
-                return;
+                throw new CommandException("Invalid sort option: " + option);
         }
         books = quickSort(books, comparator);
         if (order.equals("desc")) {
@@ -92,6 +136,13 @@ public class BookMangerImpl implements BookManager {
 
     }
 
+    /**
+     * This method sorts the books using the quicksort algorithm.
+     *
+     * @param books      The list of books to be sorted.
+     * @param comparator The comparator to determine the order of sorting.
+     * @return A sorted list of books.
+     */
     private List<Book> quickSort(List<Book> books, Comparator<Book> comparator) {
         if (books.size() <= 1) {
             return books;

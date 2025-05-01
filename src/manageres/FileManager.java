@@ -1,11 +1,8 @@
 package manageres;
 
 import enums.Genre;
-import interfaces.BookManager;
-import interfaces.FileCommands;
 import models.Author;
 import models.Book;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

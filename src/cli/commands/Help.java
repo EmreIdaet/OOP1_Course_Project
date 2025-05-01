@@ -4,6 +4,10 @@ import exceptions.CommandException;
 import interfaces.Command;
 
 public class Help implements Command {
+    /**
+     * This class is responsible for displaying help information about the available commands.
+     * It provides a list of commands and their descriptions to the user.
+     */
     @Override
     public void execute(String[] args) throws CommandException {
         System.out.println("The following commands are supported:");

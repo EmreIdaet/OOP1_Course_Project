@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Book {
+    /**
+     * This class represents a book with an author, title, genre, description, year of publication,
+     * keywords, rating, and ISBN number. It provides methods to get the book's details.
+     */
     private Author author;
     private String title;
     private Genre genre;
@@ -15,6 +19,19 @@ public class Book {
     private double rating;
     private int isbn;
 
+    /**
+     * Constructor to create a Book object with the specified author, title, genre, description,
+     * year of publication, keywords, rating, and ISBN number.
+     *
+     * @param author      The author of the book.
+     * @param title       The title of the book.
+     * @param genre       The genre of the book.
+     * @param description A brief description of the book.
+     * @param year        The year of publication.
+     * @param keywords    Keywords associated with the book.
+     * @param rating      The rating of the book.
+     * @param isbn        The ISBN number of the book.
+     */
     public Book(Author author, String title, Genre genre, String description, int year, String keywords, double rating, int isbn) {
         this.author = author;
         this.title = title;

@@ -7,14 +7,32 @@ import interfaces.UserManager;
 import manageres.FileManager;
 
 public class BookRemove implements Command {
+    /**
+     * This class is responsible for removing a book from the system.
+     * It checks if the user is an admin before allowing the removal.
+     * If the book is not found, it informs the user.
+     */
     private final BookManager bookManager;
     private final UserManager userManager;
 
+    /**
+     * Constructor for BookRemove command.
+     *
+     * @param bookManager The book manager to handle book operations.
+     * @param userManager The user manager to check user permissions.
+     */
     public BookRemove(BookManager bookManager, UserManager userManager) {
         this.bookManager = bookManager;
         this.userManager = userManager;
     }
 
+    /**
+     * Executes the command to remove a book from the system.
+     * Checks if the user is an admin before performing the removal.
+     *
+     * @param args Command line arguments (ISBN of the book).
+     * @throws CommandException If the user is not an admin or if the book is not found.
+     */
     @Override
     public void execute(String[] args) throws CommandException {
         if (!userManager.isAdmin()) {
