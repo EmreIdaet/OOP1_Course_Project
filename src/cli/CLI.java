@@ -8,7 +8,7 @@ import cli.commands.user.UserLogout;
 import cli.commands.user.UserRemove;
 import exceptions.CommandException;
 import interfaces.*;
-import manageres.BookMangerImpl;
+import manageres.LibraryManger;
 import manageres.UserManagerImpl;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class CLI {
      * This class is responsible for handling the command line interface of the library system.
      * It initializes the command map and runs the main loop to accept user input.
      */
-    private final BookManager bookManager = new BookMangerImpl();
+    private final BookManager bookManager = new LibraryManger();
     private final UserManager userManager = new UserManagerImpl();
     private final Scanner scanner = new Scanner(System.in);
     private String openedFile = null;

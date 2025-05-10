@@ -2,14 +2,13 @@ package manageres;
 
 import exceptions.CommandException;
 import interfaces.BookManager;
-import interfaces.FileSupplier;
 import models.Book;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class BookMangerImpl implements BookManager {
+public class LibraryManger implements BookManager {
     /**
      * This class implements the BookManager interface and provides methods to manage a collection of books.
      * It allows adding, removing, retrieving, and sorting books based on various criteria.
@@ -22,7 +21,7 @@ public class BookMangerImpl implements BookManager {
      * @param books The list of books to be set.
      */
     public static void setBooks(List<Book> books) {
-        BookMangerImpl.books = books;
+        LibraryManger.books = books;
     }
 
     /**
@@ -88,17 +87,40 @@ public class BookMangerImpl implements BookManager {
     public List<Book> findBooks(String option, String value) {
         List<Book> foundBooks = new ArrayList<>();
         for (Book book : books) {
-            if (option.equals("title") && book.getTitle().equalsIgnoreCase(value)) {
-                foundBooks.add(book);
-            } else if (option.equals("author") && (book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName()).equalsIgnoreCase(value)) {
-                foundBooks.add(book);
-            } else if (option.equals("tag")) {
-                for (String keyword : book.getKeywords()) {
-                    if (keyword.equalsIgnoreCase(value)) {
+            switch (option) {
+                case "title":
+                    if (book.getTitle().equalsIgnoreCase(value)) {
                         foundBooks.add(book);
                     }
-                }
+                    break;
+                case "author":
+                    String authorName = book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName();
+                    if (authorName.equalsIgnoreCase(value)) {
+                        foundBooks.add(book);
+                    }
+                    break;
+                case "tag":
+                    for (String keyword : book.getKeywords()) {
+                        if (keyword.equalsIgnoreCase(value)) {
+                            foundBooks.add(book);
+                            break;
+                        }
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid search option: " + option);
             }
+//            if (option.equals("title") && book.getTitle().equalsIgnoreCase(value)) {
+//                foundBooks.add(book);
+//            } else if (option.equals("author") && (book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName()).equalsIgnoreCase(value)) {
+//                foundBooks.add(book);
+//            } else if (option.equals("tag")) {
+//                for (String keyword : book.getKeywords()) {
+//                    if (keyword.equalsIgnoreCase(value)) {
+//                        foundBooks.add(book);
+//                    }
+//                }
+//            }
         }
         return new ArrayList<>(foundBooks);
     }

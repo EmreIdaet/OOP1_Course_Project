@@ -5,7 +5,7 @@ import interfaces.BookManager;
 import interfaces.Command;
 import interfaces.FileStatus;
 import interfaces.FileSupplier;
-import manageres.BookMangerImpl;
+import manageres.LibraryManger;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class Close implements Command {
         if (args.length < 1) {
             throw new CommandException("Usage: close");
         }
-        BookMangerImpl.setBooks(new ArrayList<>());
+        LibraryManger.setBooks(new ArrayList<>());
         String currentFile = fileSupplier.getFile();
         String filename = currentFile.split("/")[currentFile.split("/").length - 1];
         fileStatus.setCurrentFile(null);
