@@ -38,7 +38,7 @@ public class BookSort implements Command {
         if (!userManager.isLoggedIn()) {
             throw new CommandException("You must be logged in to sort books.");
         }
-        if (args.length < 1) {
+        if (args.length < 2) {
             throw new CommandException("Usage: bookssort <option> [asc | desc] ");
         }
         String option = args[1];

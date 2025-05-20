@@ -70,7 +70,7 @@ public class BookAdd implements Command {
             int isbn = Integer.parseInt(scanner.nextLine());*/
 
             String title = args[1];
-            String[] authorParts = args[2].split("_");
+            String[] authorParts = args[2].split(" ");
             if (authorParts.length != 2) throw new CommandException("Author must be in format First_Last");
             Author author = new Author(authorParts[0], authorParts[1]);
             int year = Integer.parseInt(args[3]);
