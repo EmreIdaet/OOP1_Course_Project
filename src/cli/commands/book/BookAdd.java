@@ -50,7 +50,7 @@ public class BookAdd implements Command {
         }
 
         try {
-            System.out.print("Title: ");
+           /* System.out.print("Title: ");
             String title = scanner.nextLine();
             System.out.print("Author first name: ");
             String first = scanner.nextLine();
@@ -67,9 +67,20 @@ public class BookAdd implements Command {
             System.out.print("Description: ");
             String description = scanner.nextLine();
             System.out.print("ISBN (int): ");
-            int isbn = Integer.parseInt(scanner.nextLine());
+            int isbn = Integer.parseInt(scanner.nextLine());*/
 
-            Book book = new Book(new Author(first, last), title, genre, description, year, keywordsInput, rating, isbn);
+            String title = args[1];
+            String[] authorParts = args[2].split("_");
+            if (authorParts.length != 2) throw new CommandException("Author must be in format First_Last");
+            Author author = new Author(authorParts[0], authorParts[1]);
+            int year = Integer.parseInt(args[3]);
+            double rating = Double.parseDouble(args[4]);
+            Genre genre = Genre.fromString(args[5]);
+            String keywords = args[6];
+            String description = args[7];
+            int isbn = Integer.parseInt(args[8]);
+
+            Book book = new Book(author, title, genre, description, year, keywords, rating, isbn);
             bookManager.addBook(book);
             System.out.println("Book added successfully.");
         } catch (IllegalArgumentException e) {

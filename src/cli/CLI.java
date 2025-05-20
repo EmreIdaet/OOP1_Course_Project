@@ -13,8 +13,11 @@ import manageres.UserManagerImpl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CLI {
     /**
@@ -64,6 +67,8 @@ public class CLI {
             System.out.print("> ");
             String input = scanner.nextLine();
             String[] args = input.trim().split(" ");
+            List<String> parsedArgs = parseArgumentsWithQuotes(args);
+            args = parsedArgs.toArray(new String[0]);
             if (args.length == 0) {
                 continue;
             }
@@ -105,5 +110,25 @@ public class CLI {
      */
     private String getCurrentFile() {
         return this.openedFile;
+    }
+
+    /**
+     * Parses command line arguments, allowing for quoted strings to be treated as single arguments.
+     *
+     * @param args The command line arguments.
+     * @return A list of parsed arguments.
+     */
+    private List<String> parseArgumentsWithQuotes(String[] args) {
+        String input = String.join(" ", args);
+        Matcher matcher = Pattern.compile("\\\"(.*?)\\\"|\\S+").matcher(input);
+        List<String> result = new java.util.ArrayList<>();
+        while (matcher.find()) {
+            if (matcher.group(1) != null) {
+                result.add(matcher.group(1)); // текст в кавички
+            } else {
+                result.add(matcher.group());  // отделна дума
+            }
+        }
+        return result;
     }
 }
